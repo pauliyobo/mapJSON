@@ -1,0 +1,29 @@
+{
+ "name": "test",
+ "borders": [
+  50,
+  50,
+  50
+ ],
+ "items": [
+  {
+   "minx": 0,
+   "maxx": 50,
+   "miny": 0,
+   "maxy": 50,
+   "minz": 0,
+   "maxz": 50,
+   "type": "testing"
+  },
+  {
+   "minx": 0,
+   "maxx": 50,
+   "miny": 0,
+   "maxy": 50,
+   "minz": 0,
+   "maxz": 50,
+   "type": "zone",
+   "name": "testing zone"
+  }
+ ]
+}
