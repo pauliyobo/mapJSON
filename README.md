@@ -2,11 +2,11 @@
 ## what is mapJSON?
 This is a flexible map engine that can be used in audiogames creation.
 it is highly customizable, you can create sidescroller, 2d or 3d maps.
-The engine it's self uses json when it parses the map in files, so if you want to you could create the maps with raw json data.
-## how to use
-We will now create a minimal map.
+The engine it's self uses json when it parses the json data  from the  files, so if you want to you could create the maps with raw json data.
+## usage
+We will now create an example map.
 ```python
-import mapjson 
+import mapjson
 m = mapjson.Map()
 m.set_name('testing map')
 m.set_borders((50, 50, 50))
@@ -15,7 +15,7 @@ m.add_zone(0, 50, 0, 50, 0, 50, 'testing zone')
 m.dump(in_file=True, file='test.json')
 ```
 So what we did was importing the mapjson module
-We instantiated the map class and added a tile and a zone. After that we dumped the map data in the file, so that it can be loaded later.
+We instantiated the map class and added a tile and a zone. After that we dumped the map data in the file named test.json so that it can be loaded later.
 What does the file data look like?
 ```json
 {
@@ -50,7 +50,6 @@ What does the file data look like?
 ```
 if we were to load  the map class from the json file, we would get the tile and the zone previously added.
 ## notes
-* the source is implemented only as a map type, you will have to provide your own sound class to get it working
 * the test.json has been left in the repository so that you can mess around with it
 ## methods
 Here is a list of methods, which you can use when interacting with the map class.
@@ -61,14 +60,18 @@ this will set the map name to the parameter given
 ```python
 Map.set_borders((x, y, z))
 ```
-set_borders() takes a tuple of 3 parameters which are x, y, and z. With those the map will have a size of the borders defined.
-Map.add_tile() Map.add_zone() and Map.add_src() take the same arguments which are
-minx, maxx, miny, maxy, minz, maxz, type for tile, name for the zone, and sound for the source.
+set_borders() takes a tuple of 3 parameters which are x, y, and z. Those define the borders of the map, therefore the size of the map can be managed from this function.
+Map.add_tile() and Map.add_zone() take the same arguments which are
+minx, maxx, miny, maxy, minz, maxz, type for tile and name for the zone.
+Map.get_tile_at() Map.get_zone() Map.get_tile_obj() and map.get_zone_obj() take respectively 3 parameters which are x, y and z. Those parameters have a default value of 0.
+get_tile_at() and get_zone() will return the string of the tile type, or the zone name. While, get_tile_obj() and get_zone_obj() will return the tile or zone's object.
+Map.delete_tile_at() and Map.delete_zone() take 3 parameters which are x, y, and z. Those have a default value of 0
+Those functions are useful to delete certain tiles or zones from your map.
 Those have all a default value, so you could for example easily create a tile that has only the maxx defined, which would be good for a sidescroller.
 ```python
 Map.dump(in_file=False, file='')
 ```
-This method allows you to dump the map data in to a file. This will occur if in_file is true, and if the file name is not blank. If the conditions are not met, the data will be returned.
+This method allows you to dump the map data in to a file. This will occur if in_file is true, and if the file name is not blank. If the conditions are not met, the data will be returned as a string.
 ```python
 Map.load(data='', from_file=False, name='')
 ```
