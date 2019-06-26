@@ -43,7 +43,7 @@ class	Map(object):
 
 	def	get_tile(self,	x=0,	y=0,	z=0):
 		try:
-			t = get_tile_obj(x, y, z)
+			t = self.get_tile_obj(x, y, z)
 			if t:
 				return t.type
 			else:
