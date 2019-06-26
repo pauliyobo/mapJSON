@@ -119,3 +119,6 @@ class	Map(object):
 			self.zones	=	[zone(t['minx'],	t['maxx'],	t['miny'],	t['maxy'],	t['minz'],	t['maxz'],	t['name'])	for	t	in	data['items']	if	'name'	in	t.keys()]
 		except	Exception	as	e:
 			pass
+
+	def	__repr__(self):
+		return	"Map(maxx=%d, maxy=%d, maxz=%d, name=%s)"	%	(self.maxx,	self.maxy,	self.maxz,	repr(self.name))
