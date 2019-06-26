@@ -122,3 +122,10 @@ class	Map(object):
 
 	def	__repr__(self):
 		return	"Map(maxx=%d, maxy=%d, maxz=%d, name=%s)"	%	(self.maxx,	self.maxy,	self.maxz,	repr(self.name))
+
+	def	__getitem__(self,	item):
+		if	isinstance(item,	int):
+			return	self.get_tile(item)
+		elif	isinstance(item, tuple):
+			return	self.get_tile(*item)
+		raise	TypeError("Must send tuple or int, not %r"	%	item)
