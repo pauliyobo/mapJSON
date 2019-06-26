@@ -22,11 +22,9 @@ class	zone(tile):
 		self.name	=	name
 	
 class	Map(object):
-	def	__init__(self):
-		self.name	=	''
-		self.maxx	=	0
-		self.maxy	=	0
-		self.maxz	=	0
+	def	__init__(self,	maxx=0,	maxy=0,	maxz=0,	name=""):
+		self.set_borders((maxx,	maxy,	maxz))
+		self.set_name(name)
 		self.tiles	=	[]
 		self.zones	=	[]
 
