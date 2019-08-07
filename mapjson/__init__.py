@@ -22,11 +22,9 @@ class	zone(tile):
 		self.name	=	name
 	
 class	Map(object):
-	def	__init__(self):
-		self.name	=	''
-		self.maxx	=	0
-		self.maxy	=	0
-		self.maxz	=	0
+	def	__init__(self,	maxx=0,	maxy=0,	maxz=0,	name=""):
+		self.set_borders((maxx,	maxy,	maxz))
+		self.set_name(name)
 		self.tiles	=	[]
 		self.zones	=	[]
 
@@ -45,7 +43,7 @@ class	Map(object):
 
 	def	get_tile(self,	x=0,	y=0,	z=0):
 		try:
-			t = get_tile_obj(x, y, z)
+			t = self.get_tile_obj(x, y, z)
 			if t:
 				return t.type
 			else:
@@ -121,3 +119,13 @@ class	Map(object):
 			self.zones	=	[zone(t['minx'],	t['maxx'],	t['miny'],	t['maxy'],	t['minz'],	t['maxz'],	t['name'])	for	t	in	data['items']	if	'name'	in	t.keys()]
 		except	Exception	as	e:
 			pass
+
+	def	__repr__(self):
+		return	"Map(maxx=%d, maxy=%d, maxz=%d, name=%s)"	%	(self.maxx,	self.maxy,	self.maxz,	repr(self.name))
+
+	def	__getitem__(self,	item):
+		if	isinstance(item,	int):
+			return	self.get_tile(item)
+		elif	isinstance(item, tuple):
+			return	self.get_tile(*item)
+		raise	TypeError("Must send tuple or int, not %r"	%	item)
