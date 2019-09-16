@@ -100,7 +100,7 @@ class Map:
         except Exception as e:
             pass
 
-    def delete_zone(self, x=0, y=0, z=0):
+    def delete_zone_at(self, x=0, y=0, z=0):
         try:
             z = self.get_zone_obj(x, y, z)
             if z:
