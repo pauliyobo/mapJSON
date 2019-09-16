@@ -1,10 +1,8 @@
 import json
+import os
 
-
-class tile(object):
-    """The	tile	class."""
-
-    def __init__(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=""):
+class MapObj:
+    def __init__(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=None, value=None):
         self.minx = minx
         self.maxx = maxx
         self.miny = miny
@@ -12,6 +10,7 @@ class tile(object):
         self.minz = minz
         self.maxz = maxz
         self.type = type
+        self.value = value
 
     def covers(self, x, y, z):
         if (
@@ -25,14 +24,19 @@ class tile(object):
             return True
         return False
 
+class tile(MapObj):
+    """The	tile	class."""
 
-class zone(tile):
-    def __init__(self, minx, maxx, miny, maxy, minz, maxz, name):
-        super(zone, self).__init__(minx, maxx, miny, maxy, minz, maxz, type="zone")
+    def __init__(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, tiletype=""):
+        super(tile, self).__init__(minx, maxx, miny, maxy, minz, maxz, "tile")
+        self.tiletype = tiletype
+
+class zone(MapObj):
+    def __init__(self, minx, maxx, miny, maxy, minz, maxz, name=""):
+        super(zone, self).__init__(minx, maxx, miny, maxy, minz, maxz, "zone")
         self.name = name
 
-
-class Map(object):
+class Map:
     def __init__(self, maxx=0, maxy=0, maxz=0, name=""):
         self.set_borders((maxx, maxy, maxz))
         self.set_name(name)
@@ -138,10 +142,10 @@ class Map(object):
                     t["maxy"],
                     t["minz"],
                     t["maxz"],
-                    t["type"],
+                    t["tiletype"],
                 )
-                for t in data["items"]
-                if t["type"] in tiles
+                for t in data["objects"]
+                if t["type"] == "tile"
             ]
             self.zones = [
                 zone(
@@ -153,8 +157,8 @@ class Map(object):
                     t["maxz"],
                     t["name"],
                 )
-                for t in data["items"]
-                if "name" in t.keys()
+                for t in data["objects"]
+                if t["type"] == "zone"
             ]
         except Exception as e:
             pass

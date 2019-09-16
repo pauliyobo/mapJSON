@@ -5,7 +5,7 @@
   50,
   50
  ],
- "items": [
+ "objects": [
   {
    "minx": 0,
    "maxx": 50,
@@ -13,7 +13,8 @@
    "maxy": 50,
    "minz": 0,
    "maxz": 50,
-   "type": "testing"
+   "type": "tile",
+   "tiletype": "testing"
   },
   {
    "minx": 0,
