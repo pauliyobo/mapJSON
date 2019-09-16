@@ -1,4 +1,5 @@
 # mapJSON
+Note: documentation needs  to be updated, please do not rely on it for now. 
 ## what is mapJSON?
 This is a flexible map engine that can be used in audiogames creation.
 it is highly customizable, you can create sidescroller, 2d or 3d maps.
