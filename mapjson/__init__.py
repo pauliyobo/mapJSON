@@ -115,7 +115,7 @@ class Map:
             data2 = {
                 "name": self.name,
                 "borders": [self.maxx, self.maxy, self.maxz],
-                "items": self.tiles + self.zones,
+                "objects": self.tiles + self.zones,
             }
             if in_file == True and file != "":
                 with open(file, "w") as f:
@@ -125,10 +125,10 @@ class Map:
         except Exception as e:
             pass
 
-    def load(self, data="", from_file=False, name=""):
+    def load(self, target=""):
         try:
-            if from_file and name != "":
-                with open(name, "r") as f:
+            if target and os.path.isfile(target):
+                with open(target, "r") as f:
                     data = json.loads(f.read())
             else:
                 data = json.loads(data)
@@ -161,7 +161,7 @@ class Map:
                 if t["type"] == "zone"
             ]
         except Exception as e:
-            pass
+            print(e.args)
 
     def __repr__(self):
         return "Map(maxx=%d, maxy=%d, maxz=%d, name=%s)" % (
